@@ -3,6 +3,7 @@ import Cam from "../img/cam.png"
 import Add from "../img/add.png"
 import More from "../img/more.png"
 import { Messages } from "./Messages.jsx"
+import TextInput from "./TextInput.jsx"
 const Chat = () => {
   return (
     <div className="chat" >
@@ -15,6 +16,7 @@ const Chat = () => {
         </div>
       </div>
       <Messages></Messages>
+      <TextInput></TextInput>
     </div>
   )
 }
