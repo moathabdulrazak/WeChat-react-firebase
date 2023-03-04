@@ -1,27 +1,49 @@
 import React from 'react'
 import img from "../img/img.png"
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../firebase";
-
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { auth, storage } from "../firebase";
+import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const userName = e.target[0].value
+    const displayName = e.target[0].value
     const email = e.target[1].value
     const password = e.target[2].value
     const file = e.target[3].files[0]
+try {
 
-createUserWithEmailAndPassword(auth, email, password)
-  .then((userCredential) => {
-    const user = userCredential.user;
-    console.log(user);
-    // ...
-  })
-  .catch((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    // ..
-  });
+  const res = await createUserWithEmailAndPassword(auth, email, password)
+  
+      //Create a unique image name
+      const date = new Date().getTime();
+      const storageRef = ref(storage, `${displayName + date}`);
+
+      await uploadBytesResumable(storageRef, file).then(() => {
+        getDownloadURL(storageRef).then(async (downloadURL) => {
+          try {
+            //Update profile
+            await updateProfile(res.user, {
+              displayName,
+              photoURL: downloadURL,
+            });
+            //create user on firestore
+            // await setDoc(doc(db, "users", res.user.uid), {
+            //   uid: res.user.uid,
+            //   displayName,
+            //   email,
+            //   photoURL: downloadURL,
+            // });
+
+            //create empty user chats on firestore
+          } catch (err) {
+    console.log(err);
+          }
+        });
+      });
+} catch (error) {
+  
+}
+
   }
   return (
     <div className="formContainer" >
