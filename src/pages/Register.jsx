@@ -14,6 +14,7 @@ const Register = () => {
 <button>Sign up</button>
         </form>
         <p>Do you have an account? Login</p>
+        <span>weChat</span>
       </div>
     </div>
   )
