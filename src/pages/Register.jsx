@@ -4,7 +4,7 @@ const Register = () => {
   return (
     <div className="formContainer" >
       <div className="formWrapper">
-        <span className="logo" >Ichat</span>
+        <span className="logo" >WeChat</span>
         <span className="title" >Register</span>
         <form>
 <input type="text" placeholder="User Name" />
