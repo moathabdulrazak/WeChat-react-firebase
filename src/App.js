@@ -4,9 +4,9 @@ import Register from "./pages/Register.jsx";
 import "./style.scss"
 function App() {
   return (
-    // <Register></Register>
+    <Register></Register>
     // <Login></Login>
-    <Home></Home>
+    // <Home></Home>
   );
 }
 
