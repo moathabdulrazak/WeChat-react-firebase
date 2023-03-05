@@ -1,8 +1,9 @@
 import React from 'react'
 import img from "../img/img.png"
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
-import { auth, storage } from "../firebase";
+import { auth, db, storage } from "../firebase";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import { doc, setDoc } from "firebase/firestore"; 
 const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -26,17 +27,17 @@ try {
               displayName,
               photoURL: downloadURL,
             });
-            //create user on firestore
-            // await setDoc(doc(db, "users", res.user.uid), {
-            //   uid: res.user.uid,
-            //   displayName,
-            //   email,
-            //   photoURL: downloadURL,
-            // });
+            // create user on firestore
+            await setDoc(doc(db, "users", res.user.uid), {
+              uid: res.user.uid,
+              displayName,
+              email,
+              photoURL: downloadURL,
+            });
 
             //create empty user chats on firestore
           } catch (err) {
-    console.log(err);
+    // console.log(err);
           }
         });
       });
