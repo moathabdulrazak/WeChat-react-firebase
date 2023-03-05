@@ -8,9 +8,8 @@ const firebaseConfig = {
   projectId: "chat-1c0ed",
   storageBucket: "chat-1c0ed.appspot.com",
   messagingSenderId: "638414803557",
-  appId: "1:638414803557:web:51def95733132ff9596c8c"
+  appId: "1:638414803557:web:d00a8a6e8c4a32f7596c8c"
 };
-
 
 export const app = initializeApp(firebaseConfig);
 export const auth = getAuth()
